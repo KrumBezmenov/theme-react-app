@@ -17,7 +17,7 @@ app.use(authMiddleware);
 app.use(routes);
 
 mongoose
-  .connect(`mongodb://127.0.0.1:27017/books-forum-db`)
+  .connect(`mongodb://127.0.0.1:27017/themes-app-db`)
   .then(() => {
     console.log(`DB Connected`);
     app.listen(port, () =>
