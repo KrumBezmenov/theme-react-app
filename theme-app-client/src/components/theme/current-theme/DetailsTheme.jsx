@@ -12,7 +12,7 @@ function Details() {
                   <div class="h-[460px] rounded-lg bg-gray-300 dark:bg-gray-700 mb-4">
                     <img
                       class="w-full h-full object-cover"
-                      src="https://cdn.pixabay.com/photo/2020/05/22/17/53/mockup-5206355_960_720.jpg"
+                      src="https://st4.depositphotos.com/10440072/40457/i/450/depositphotos_404572958-stock-photo-perfect-beach-view-summer-holiday.jpg"
                       alt="Product Image"
                     />
                   </div>
