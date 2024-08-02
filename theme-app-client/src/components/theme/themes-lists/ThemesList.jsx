@@ -1,4 +1,12 @@
+import { useEffect, useState } from "react";
+import * as themesAPI from "../../../api/themes-api";
+
 function ThemesList() {
+  const [themes, setThemes] = useState([]);
+  useEffect(() => {
+    themesAPI.getAll().then((result) => setThemes(result));
+  }, []);
+
   return (
     <>
       <div class="selection:bg-rose-500 selection:text-white">
