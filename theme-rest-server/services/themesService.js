@@ -36,12 +36,12 @@ exports.delete = (themesId) => {
   return Themes.findByIdAndDelete(themesId);
 };
 
-exports.search = (title) => {
+exports.search = (country) => {
   let query = {};
 
-  if (title) {
+  if (country) {
     // query.name = name;
-    query.title = new RegExp(title, "i");
+    query.country = new RegExp(country, "i");
   }
 
   return Themes.find(query);

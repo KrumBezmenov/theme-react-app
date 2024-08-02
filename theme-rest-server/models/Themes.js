@@ -1,21 +1,23 @@
 const mongoose = require("mongoose");
 
 const themesSchema = new mongoose.Schema({
-  title: {
+  country: {
     type: String,
-    minLength: [1, "Title should be at least 1 characters"],
+    minLength: [1, "Country name should be at least 1 characters"],
+    required: true,
+  },
+  city: {
+    type: String,
+    minLength: [1, "City name should be at least 2 characters"],
     required: true,
   },
   genre: {
     type: String,
-    minLength: [3, "Genre should be at least 3 characters"],
+    minLength: [3, "Type of Adventure should be at least 3 characters"],
+    maxLength: [80, "Type of Adventure should be maximum 80 characters"],
     required: true,
   },
-  author: {
-    type: String,
-    minLength: [2, "Author name should be at least 2 characters"],
-    required: true,
-  },
+
   image: {
     type: String,
     match: [/^https?:\/\//, "Invalid image url"],
@@ -23,7 +25,8 @@ const themesSchema = new mongoose.Schema({
   },
   description: {
     type: String,
-    minLength: [10, "Description should be at least 10 characters"],
+    minLength: [100, "Description should be at least 100 characters"],
+    maxLength: [1500, "Description should be maximum 1500 characters"],
     required: true,
   },
   reviewedList: [

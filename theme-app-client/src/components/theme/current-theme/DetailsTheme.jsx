@@ -39,7 +39,8 @@ function Details() {
                     Vacation Location Name
                   </h2>
                   <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
-                    Chill and Advanture
+                    Chill and Advanture Chill and Advanture Chill and Advanture
+                    Chill and Advanturee
                   </p>
 
                   <div>
