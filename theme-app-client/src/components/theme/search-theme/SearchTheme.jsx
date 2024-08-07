@@ -3,13 +3,6 @@ import themesAPI from "../../../api/themes-api";
 import ItemsLists from "./items-lists/ItemsLists";
 
 function SearchTheme() {
-  // useEffect(async () => {
-  //   const searchData = await themesAPI.searchThemes("");
-  //   console.log("searchData", searchData);
-
-  //   setSearchData(searchData);
-  // }, []);
-
   async function searchHandler(e) {
     e.preventDefault();
 
@@ -21,7 +14,6 @@ function SearchTheme() {
   const [query, setQuery] = useState();
 
   const [searchData, setSearchData] = useState([]);
-  // [searchData] = useGetAllThemes();
   return (
     <>
       <div className="selection:bg-rose-500 selection:text-white">

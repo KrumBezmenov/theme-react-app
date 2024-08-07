@@ -53,7 +53,6 @@ router.post("/:themesId/update", isAuth, isThemesOwner, async (req, res) => {
 router.get("/:themesId/details", async (req, res) => {
   const themes = await themesService.getOneDetailed(req.params.themesId).lean();
   const isOwner = themes.owner && themes.owner._id == req.user?._id;
-
   res.json({ ...themes, isOwner });
 });
 
