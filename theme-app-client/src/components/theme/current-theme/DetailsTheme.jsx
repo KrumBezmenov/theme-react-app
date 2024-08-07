@@ -1,87 +1,24 @@
-import { Link } from "react-router-dom";
+import DetailsCard from "./DetailsCard/DetailsCard";
 
-function Details() {
+import { useGetOneThemes } from "../../../hooks/useThemes";
+import { useParams } from "react-router-dom";
+function Details({ token }) {
+  let { themesId } = useParams();
+  console.log("themeId", themesId);
+  const [theme] = useGetOneThemes(themesId);
+  console.log(theme);
+
   return (
     <>
-      <div class="selection:bg-rose-500 selection:text-white">
-        <div class="min-h-screen bg-purple-200 flex justify-center items-center">
-          <div class="bg-gray-100 dark:bg-gray-800 py-8">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div class="flex flex-col md:flex-row -mx-4">
-                <div class="md:flex-1 px-4">
-                  <div class="h-[460px] rounded-lg bg-gray-300 dark:bg-gray-700 mb-4">
-                    <img
-                      class="w-full h-full object-cover"
-                      src="https://st4.depositphotos.com/10440072/40457/i/450/depositphotos_404572958-stock-photo-perfect-beach-view-summer-holiday.jpg"
-                      alt="Product Image"
-                    />
-                  </div>
-                  <div class="flex -mx-2 mb-4">
-                    <div class="w-1/2 px-2">
-                      <Link to="/themes">
-                        <button class="w-full bg-gray-900 dark:bg-gray-600 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800 dark:hover:bg-gray-700">
-                          Back
-                        </button>
-                      </Link>
-                    </div>
-                    <div class="w-1/2 px-2">
-                      <Link to="/:themesId/edit">
-                        <button class="w-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white py-2 px-4 rounded-full font-bold hover:bg-gray-300 dark:hover:bg-gray-600">
-                          Edit
-                        </button>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="md:flex-1 px-4">
-                  <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-2">
-                    Vacation Location Name
-                  </h2>
-                  <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
-                    Chill and Advanture Chill and Advanture Chill and Advanture
-                    Chill and Advanturee
-                  </p>
-
-                  <div>
-                    <span class="font-bold text-gray-700 dark:text-gray-300">
-                      Product Description:
-                    </span>
-                    <p class="text-gray-600 dark:text-gray-300 text-sm mt-2">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Sed sed ante justo. Integer euismod libero id mauris
-                      malesuada tincidunt. Vivamus commodo nulla ut lorem
-                      rhoncus aliquet. Duis dapibus augue vel ipsum pretium, et
-                      venenatis sem blandit. Quisque ut erat vitae nisi ultrices
-                      placerat non eget velit. Integer ornare mi sed ipsum
-                      lacinia, non sagittis mauris blandit. Morbi fermentum
-                      libero vel nisl suscipit, nec tincidunt mi consectetur.
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Sed sed ante justo. Integer euismod libero id mauris
-                      malesuada tincidunt. Vivamus commodo nulla ut lorem
-                      rhoncus aliquet. Duis dapibus augue vel ipsum pretium, et
-                      venenatis sem blandit. Quisque ut erat vitae nisi ultrices
-                      placerat non eget velit. Integer ornare mi sed ipsum
-                      lacinia, non sagittis mauris blandit. Morbi fermentum
-                      libero vel nisl suscipit, nec tincidunt mi consectetur.
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Sed sed ante justo. Integer euismod libero id mauris
-                      malesuada tincidunt. Vivamus commodo nulla ut lorem
-                      rhoncus aliquet. Duis dapibus augue vel ipsum pretium, et
-                      venenatis sem blandit. Quisque ut erat vitae nisi ultrices
-                      placerat non eget velit. Integer ornare mi sed ipsum
-                      lacinia, non sagittis mauris blandit. Morbi fermentum
-                      libero vel nisl suscipit, nec tincidunt mi consectetur.
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Sed sed ante justo. Integer euismod libero id mauris
-                      malesuada tincidunt. Vivamus commodo nulla ut lorem
-                      rhoncus aliquet. Duis dapibus augue vel ipsum pretium, et
-                      venenatis sem blandit. Quisque ut erat vitae nisi ultrices
-                      placerat non eget velit.
-                    </p>
-                  </div>
-                </div>
-              </div>
+      <div className="selection:bg-rose-500 selection:text-white">
+        <div className="min-h-screen bg-purple-200 flex justify-center items-center">
+          <div className="bg-gray-100 dark:bg-gray-800 py-8">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+              <DetailsCard
+                token={token}
+                key={theme._id}
+                theme={theme}
+              ></DetailsCard>
             </div>
           </div>
         </div>
