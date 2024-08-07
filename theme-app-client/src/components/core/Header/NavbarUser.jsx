@@ -1,7 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-function Navbar() {
+function NavbarUser(props) {
+  const navigate = useNavigate();
+
+  function logoutHandler(e) {
+    e.preventDefault();
+    props.removeToken();
+    navigate(0);
+  }
+
   return (
     <nav className="bg-yellow-400">
       <div className="max-w-6xl mx-auto px-4">
@@ -35,22 +43,22 @@ function Navbar() {
               >
                 Search
               </Link>
+              <Link
+                to="/create"
+                className="py-5 px-3 text-gray-700 hover:text-red-900"
+              >
+                Recommend
+              </Link>
             </div>
           </div>
 
           <div className="hidden md:flex items-center space-x-1">
-            <Link
-              to="/login"
-              className="py-2 px-3 bg-green-400 hover:bg-green-300 text-green-900 hover:text-green-800 rounded transition duration-300"
+            <button
+              onClick={logoutHandler}
+              className="py-2 px-3 bg-red-400 hover:bg-red-300 text-yellow-900 hover:text-yellow-800 rounded transition duration-300"
             >
-              Login
-            </Link>
-            <Link
-              to="/register"
-              className="py-2 px-3 bg-orange-400 hover:bg-orange-300 text-orange-900 hover:text-orange-800 rounded transition duration-300"
-            >
-              Signup
-            </Link>
+              Logout
+            </button>
           </div>
 
           <div className="md:hidden flex items-center">
@@ -77,4 +85,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default NavbarUser;
