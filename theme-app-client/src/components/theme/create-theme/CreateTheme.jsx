@@ -16,14 +16,27 @@ async function createOneTheme(themeData, token) {
 function CreateTheme({ token }) {
   const navigate = useNavigate();
 
-  const [country, setCountry] = useState();
-  const [city, setCity] = useState();
-  const [image, setImage] = useState();
-  const [genre, setGenre] = useState();
-  const [description, setDescription] = useState();
+  const [country, setCountry] = useState("");
+  const [city, setCity] = useState("");
+  const [image, setImage] = useState("");
+  const [genre, setGenre] = useState("");
+  const [description, setDescription] = useState("");
+  const [errors, setErrors] = useState([]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const errorMap = validateForm({
+      country,
+      city,
+      image,
+      genre,
+      description,
+    });
+    setErrors(errorMap);
+    if (errorMap && errorMap.length > 0) {
+      return;
+    }
 
     const theme = await createOneTheme(
       {
@@ -35,43 +48,41 @@ function CreateTheme({ token }) {
       },
       token
     );
-    console.log("theme", theme);
-
-    navigate("/themes");
-  };
-  function validateForm() {
-    // Check if the Email is an Empty string or not.
-
-    if (country.length == 0) {
-      alert("Invalid Form, country can not be empty");
+    if (theme && theme.error) {
+      setErrors([theme.error]);
       return;
     }
 
-    if (country.length <= 10) {
-      alert("Invalid Form, country can not be less than 10 characters");
+    navigate("/themes");
+  };
 
-      return;
+  function validateForm({ country, city, image, genre, description }) {
+    let errors = [];
+    // Check if the Email is an Empty string or not.
+
+    if (country.length == 0) {
+      errors.push("Invalid Form, country can not be empty");
+    }
+
+    if (country.length <= 10) {
+      errors.push("Invalid Form, country can not be less than 10 characters");
     }
 
     // check if the password follows constraints or not.
 
-    // if password length is less than 8 characters, alert invalid form.
+    // if password length is less than 8 characters, errors.push invalid form.
 
     if (city.length < 4) {
-      alert(
+      errors.push(
         "Invalid Form, city must contain greater than or equal to 4 characters."
       );
-      return;
     }
 
     if (city.length == 0) {
-      alert("Invalid Form, city must can not be empty.");
-      return;
+      errors.push("Invalid Form, city must can not be empty.");
     }
-
+    return errors;
     // if all the conditions are valid, this means that the form is valid
-
-    alert("Welcome back");
   }
 
   return (
@@ -101,7 +112,6 @@ function CreateTheme({ token }) {
                     placeholder="City"
                   />
                 </div>
-
                 <div className="my-6 flex gap-4">
                   <div className="flex gap-4">
                     <input
@@ -131,11 +141,19 @@ function CreateTheme({ token }) {
                     placeholder="Describe your experience"
                   ></textarea>
                 </div>
+                <div>
+                  {errors.length > 0 ? (
+                    errors.map((error, index) => (
+                      <div className="bg-slate-400 p-3 left-20" id="errors">
+                        <p>{error}</p>
+                      </div>
+                    ))
+                  ) : (
+                    <span></span>
+                  )}{" "}
+                </div>
                 <div className="text-center">
                   <input
-                    onClick={() => {
-                      validateForm();
-                    }}
                     className="cursor-pointer rounded-lg bg-blue-700 px-8 py-5 text-sm font-semibold text-white"
                     value="Recommend"
                     type="submit"
