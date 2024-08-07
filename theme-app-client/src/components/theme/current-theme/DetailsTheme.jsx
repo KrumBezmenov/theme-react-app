@@ -1,11 +1,9 @@
 import DetailsCard from "./DetailsCard/DetailsCard";
-
-import { useGetOneThemes } from "../../../hooks/useThemes";
 import { useParams } from "react-router-dom";
 import DetailsCardButtons from "./DetailsCard/DetailsCardButtons";
 import { useEffect, useState } from "react";
 
-async function editOneTheme(themeId, token) {
+async function authTheme(themeId, token) {
   return fetch(`http://localhost:4000/themes/${themeId}/details`, {
     method: "GET",
     headers: {
@@ -28,7 +26,6 @@ async function guestTheme(themeId, token) {
 
 function Details({ token }) {
   let { themesId } = useParams();
-  // const [theme] = useGetOneThemes(themesId, token);
 
   const [theme, setTheme] = useState({});
   const [loaded, setLoaded] = useState(false);
@@ -39,7 +36,7 @@ function Details({ token }) {
         if (!loaded) {
           let result = {};
           if (token) {
-            result = await editOneTheme(themesId, token);
+            result = await authTheme(themesId, token);
           } else {
             result = await guestTheme(themesId);
           }
@@ -50,7 +47,6 @@ function Details({ token }) {
         }
       } catch (e) {
         setLoaded(false);
-        // Deal with the fact the chain failed
       }
     })();
   });
@@ -58,7 +54,7 @@ function Details({ token }) {
   return (
     <>
       <div className="selection:bg-rose-500 selection:text-white">
-        <div className="min-h-screen bg-purple-200 flex justify-center items-center">
+        <div className="min-h-screen bg-cover bg-[url('https://media.istockphoto.com/id/1426412520/video/wavy-sea.jpg?s=640x640&k=20&c=bpYL4jjLNK4LETIGEewFsbcVHWZNva-OHB48RE5zIRI=')] flex justify-center items-center">
           <div className="bg-gray-100 dark:bg-gray-800 py-8">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
               <DetailsCard

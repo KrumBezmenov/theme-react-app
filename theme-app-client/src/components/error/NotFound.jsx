@@ -2,7 +2,7 @@ function NotFound() {
   return (
     <>
       <div className="selection:bg-rose-500 selection:text-white">
-        <div className="min-h-screen bg-purple-200 flex justify-center items-center">
+        <div className="min-h-screen bg-cover bg-[url('https://images.unsplash.com/photo-1516474004458-f7f1cf523802?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGNvY29udXQlMjBiZWFjaHxlbnwwfHwwfHx8MA%3D%3D')] flex justify-center items-center">
           <div className="p-8 flex-1">
             <div className="w-80 bg-white rounded-3xl mx-auto overflow-hidden shadow-xl">
               <div className="relative h-48 bg-red-400 rounded-bl-4xl">

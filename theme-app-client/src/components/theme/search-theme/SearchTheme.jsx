@@ -17,7 +17,7 @@ function SearchTheme() {
   return (
     <>
       <div className="selection:bg-rose-500 selection:text-white">
-        <div className="bg-purple-200 py-10">
+        <div className="bg-[url('https://media.istockphoto.com/id/971168750/photo/water.jpg?s=170667a&w=0&k=20&c=BbuPCTAt173_WGK7IMMkiBt_p0JQvs3yEnjFDun5k2o=')] py-10">
           <form className="max-w-md mx-auto ">
             <label
               htmlFor="default-search"
@@ -61,7 +61,7 @@ function SearchTheme() {
             </div>
           </form>
         </div>
-        <div className="min-h-screen bg-purple-200 flex justify-center items-center">
+        <div className="min-h-screen bg-cover bg-[url('https://images.pexels.com/photos/1430677/pexels-photo-1430677.jpeg?cs=srgb&dl=pexels-asadphoto-1430677.jpg&fm=jpg')] flex justify-center items-center">
           <ul className="grid grid-cols-1 xl:grid-cols-3 gap-y-10 gap-x-6 items-start p-8">
             {searchData.length > 0 ? (
               searchData.map((theme) => (

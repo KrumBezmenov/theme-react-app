@@ -6,7 +6,7 @@ function ThemesList() {
   return (
     <>
       <div className="selection:bg-rose-500 selection:text-white">
-        <div className="min-h-screen bg-purple-200 flex justify-center items-center">
+        <div className="min-h-screen bg-cover bg-[url('https://media.istockphoto.com/id/952865682/photo/vivid-blue-water.jpg?s=612x612&w=0&k=20&c=riCVAqvN-2BPtiaSsBIZsqk9oZ8nmP4w43Qg3graVeU=')] flex justify-center items-center">
           <div className="bg-gradient-to-bl from-blue-50 to-violet-50 flex items-center justify-center min-h-screen">
             <div className="container mx-auto  p-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-4">

@@ -58,19 +58,14 @@ function CreateTheme({ token }) {
 
   function validateForm({ country, city, image, genre, description }) {
     let errors = [];
-    // Check if the Email is an Empty string or not.
 
     if (country.length == 0) {
       errors.push("Invalid Form, country can not be empty");
     }
 
-    if (country.length <= 10) {
-      errors.push("Invalid Form, country can not be less than 10 characters");
+    if (country.length <= 4) {
+      errors.push("Invalid Form, country can not be less than 4 characters");
     }
-
-    // check if the password follows constraints or not.
-
-    // if password length is less than 8 characters, errors.push invalid form.
 
     if (city.length < 4) {
       errors.push(
@@ -82,13 +77,12 @@ function CreateTheme({ token }) {
       errors.push("Invalid Form, city must can not be empty.");
     }
     return errors;
-    // if all the conditions are valid, this means that the form is valid
   }
 
   return (
     <>
       <div className="selection:bg-rose-500 selection:text-white">
-        <div className="min-h-screen bg-purple-200 flex justify-center items-center">
+        <div className="min-h-screen bg-cover bg-[url('https://www.colorado.edu/coloradan/sites/default/files/styles/hero/public/article-image/scenicboulder.jpeg?itok=wayKS0Qn')] flex justify-center items-center">
           <div className="mx-14 mt-10 border-2 border-blue-400 rounded-lg bg-red-500">
             <div className="mt-10 text-center font-bold">Adventure time</div>
             <div className="mt-3 text-center text-4xl font-bold">
@@ -144,7 +138,7 @@ function CreateTheme({ token }) {
                 <div>
                   {errors.length > 0 ? (
                     errors.map((error, index) => (
-                      <div className="bg-slate-400 p-3 left-20" id="errors">
+                      <div className="bg-yellow-400 p-3 left-20" id="errors">
                         <p>{error}</p>
                       </div>
                     ))

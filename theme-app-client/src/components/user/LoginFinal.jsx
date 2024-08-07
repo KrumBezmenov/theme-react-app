@@ -66,7 +66,7 @@ function LoginFinal({ setToken }) {
 
   return (
     <div className="selection:bg-rose-500 selection:text-white">
-      <div className="min-h-screen bg-purple-200 flex justify-center items-center">
+      <div className="min-h-screen bg-cover bg-[url('https://images.pexels.com/photos/457882/pexels-photo-457882.jpeg?cs=srgb&dl=pexels-asadphoto-457882.jpg&fm=jpg')] flex justify-center items-center">
         <div className="p-8 flex-1">
           <div className="w-80 bg-white rounded-3xl mx-auto overflow-hidden shadow-xl">
             <div className="relative h-48 bg-yellow-500 rounded-bl-4xl">
@@ -121,7 +121,7 @@ function LoginFinal({ setToken }) {
                 </div>
                 {errors.length > 0 ? (
                   errors.map((error) => (
-                    <div>
+                    <div className="bg-yellow-400 p-3 left-20" id="errors">
                       <p>{error}</p>
                     </div>
                   ))

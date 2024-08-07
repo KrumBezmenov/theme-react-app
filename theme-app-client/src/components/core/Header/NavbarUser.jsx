@@ -53,6 +53,9 @@ function NavbarUser(props) {
           </div>
 
           <div className="hidden md:flex items-center space-x-1">
+            <div className="py-2 px-3 bg-orange-400 hover:bg-orange-300 text-orange-900 hover:text-orange-800 rounded transition duration-1000">
+              Welcome and enjoy
+            </div>
             <button
               onClick={logoutHandler}
               className="py-2 px-3 bg-red-400 hover:bg-red-300 text-yellow-900 hover:text-yellow-800 rounded transition duration-300"

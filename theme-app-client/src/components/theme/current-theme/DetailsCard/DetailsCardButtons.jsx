@@ -1,7 +1,4 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { useState } from "react";
-import themesAPI from "../../../../api/themes-api";
-// import themesAPI from "../../../../api/themes-api";
 
 async function deleteTheme(themeData, themeId, token) {
   return fetch(`http://localhost:4000/themes/${themeId}/delete`, {
@@ -16,28 +13,13 @@ async function deleteTheme(themeData, themeId, token) {
 function DetailsCardButtons(props) {
   let { themesId } = useParams();
 
-  //   const [country] = useState();
-  //   const [city] = useState();
-  //   const [image] = useState();
-  //   const [genre] = useState();
-  //   const [description] = useState();
   const navigate = useNavigate();
 
   const token = props.token;
 
   const deleteThemeHandler = async (e) => {
     e.preventDefault();
-    const theme = await deleteTheme(
-      {
-        // country,
-        // city,
-        // image,
-        // genre,
-        // description,
-      },
-      themesId,
-      token
-    );
+    const theme = await deleteTheme({}, themesId, token);
     navigate("/themes");
   };
   if (props.theme.isOwner) {
