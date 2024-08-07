@@ -1,33 +1,28 @@
-import { useEffect, useState } from "react";
-import * as themesAPI from "../../../api/themes-api";
+import { useGetAllThemes } from "../../../hooks/useThemes";
 import ItemCard from "./ItemCard/ItemCard";
 
 function ThemesList() {
-  const [themes, setThemes] = useState([]);
-  useEffect(() => {
-    themesAPI.getAll().then((result) => setThemes(result));
-  }, []);
-
+  const [themes] = useGetAllThemes();
   return (
     <>
-      <div class="selection:bg-rose-500 selection:text-white">
-        <div class="min-h-screen bg-purple-200 flex justify-center items-center">
-          <div class="bg-gradient-to-bl from-blue-50 to-violet-50 flex items-center justify-center min-h-screen">
-            <div class="container mx-auto  p-4">
-              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-4">
-                <ItemCard></ItemCard>
-                <ItemCard></ItemCard>
-                <ItemCard></ItemCard>
-                <ItemCard></ItemCard>
-                <ItemCard></ItemCard>
-                <ItemCard></ItemCard>
-                <ItemCard></ItemCard>
-                <ItemCard></ItemCard>
-                <ItemCard></ItemCard>
-                <ItemCard></ItemCard>
-                <ItemCard></ItemCard>
-                <ItemCard></ItemCard>
-                <ItemCard></ItemCard>
+      <div className="selection:bg-rose-500 selection:text-white">
+        <div className="min-h-screen bg-purple-200 flex justify-center items-center">
+          <div className="bg-gradient-to-bl from-blue-50 to-violet-50 flex items-center justify-center min-h-screen">
+            <div className="container mx-auto  p-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-4">
+                {themes.length > 0 ? (
+                  themes.map((theme) => (
+                    <div>
+                      <ItemCard key={theme._id} theme={theme}></ItemCard>
+                    </div>
+                  ))
+                ) : (
+                  <div className="relative h-32 w-32 r">
+                    <div className="absolute inset-y-0 right-0 left-30 w-16 text-green-600 text-5xl font-bold ">
+                      No Recommendations Yet!
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
