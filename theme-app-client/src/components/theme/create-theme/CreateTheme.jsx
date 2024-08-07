@@ -1,64 +1,148 @@
-function CreateTheme() {
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
+
+async function createOneTheme(themeData, token) {
+  return fetch("http://localhost:4000/themes/create", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: token,
+    },
+    body: JSON.stringify(themeData),
+  }).then((data) => data.json());
+}
+function CreateTheme({ token }) {
+  const navigate = useNavigate();
+
+  const [country, setCountry] = useState();
+  const [city, setCity] = useState();
+  const [image, setImage] = useState();
+  const [genre, setGenre] = useState();
+  const [description, setDescription] = useState();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const theme = await createOneTheme(
+      {
+        country,
+        city,
+        image,
+        genre,
+        description,
+      },
+      token
+    );
+    console.log("theme", theme);
+
+    navigate("/themes");
+  };
+  function validateForm() {
+    // Check if the Email is an Empty string or not.
+
+    if (country.length == 0) {
+      alert("Invalid Form, country can not be empty");
+      return;
+    }
+
+    if (country.length <= 10) {
+      alert("Invalid Form, country can not be less than 10 characters");
+
+      return;
+    }
+
+    // check if the password follows constraints or not.
+
+    // if password length is less than 8 characters, alert invalid form.
+
+    if (city.length < 4) {
+      alert(
+        "Invalid Form, city must contain greater than or equal to 4 characters."
+      );
+      return;
+    }
+
+    if (city.length == 0) {
+      alert("Invalid Form, city must can not be empty.");
+      return;
+    }
+
+    // if all the conditions are valid, this means that the form is valid
+
+    alert("Welcome back");
+  }
+
   return (
     <>
-      <div class="selection:bg-rose-500 selection:text-white">
-        <div class="min-h-screen bg-purple-200 flex justify-center items-center">
-          <div class="mx-14 mt-10 border-2 border-blue-400 rounded-lg bg-red-500">
-            <div class="mt-10 text-center font-bold">Adventure time</div>
-            <div class="mt-3 text-center text-4xl font-bold">
+      <div className="selection:bg-rose-500 selection:text-white">
+        <div className="min-h-screen bg-purple-200 flex justify-center items-center">
+          <div className="mx-14 mt-10 border-2 border-blue-400 rounded-lg bg-red-500">
+            <div className="mt-10 text-center font-bold">Adventure time</div>
+            <div className="mt-3 text-center text-4xl font-bold">
               Recommend Journey
             </div>
-            <div class="p-8">
-              <div class="flex gap-4">
-                <input
-                  type="Name"
-                  name="name"
-                  class="mt-1 block w-1/2 rounded-md border border-slate-300 bg-white px-3 py-4 placeholder-slate-400 shadow-sm placeholder:font-semibold placeholder:text-gray-500 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
-                  placeholder="Country"
-                />
-                <input
-                  type="email"
-                  name="email"
-                  class="mt-1 block w-1/2 rounded-md border border-slate-300 bg-white px-3 py-4 placeholder-slate-400 shadow-sm placeholder:font-semibold placeholder:text-gray-500 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
-                  placeholder="City"
-                />
-              </div>
-
-              <div class="my-6 flex gap-4">
-                <div class="flex gap-4">
+            <form method="POST" onSubmit={handleSubmit}>
+              <div className="p-8">
+                <div className="flex gap-4">
                   <input
-                    type="Name"
-                    name="name"
-                    class="mt-1 block w-1/2 rounded-md border border-slate-300 bg-white px-3 py-4 placeholder-slate-400 shadow-sm placeholder:font-semibold placeholder:text-gray-500 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
-                    placeholder="Image URL"
+                    type="country"
+                    name="country"
+                    onChange={(e) => setCountry(e.target.value)}
+                    className="mt-1 block w-1/2 rounded-md border border-slate-300 bg-white px-3 py-4 placeholder-slate-400 shadow-sm placeholder:font-semibold placeholder:text-gray-500 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+                    placeholder="Country"
                   />
                   <input
-                    type="email"
-                    name="email"
-                    class="mt-1 block w-1/2 rounded-md border border-slate-300 bg-white px-3 py-4 placeholder-slate-400 shadow-sm placeholder:font-semibold placeholder:text-gray-500 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
-                    placeholder="Type Of Vacation"
+                    type="city"
+                    name="city"
+                    onChange={(e) => setCity(e.target.value)}
+                    className="mt-1 block w-1/2 rounded-md border border-slate-300 bg-white px-3 py-4 placeholder-slate-400 shadow-sm placeholder:font-semibold placeholder:text-gray-500 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+                    placeholder="City"
                   />
                 </div>
+
+                <div className="my-6 flex gap-4">
+                  <div className="flex gap-4">
+                    <input
+                      type="img"
+                      name="image"
+                      onChange={(e) => setImage(e.target.value)}
+                      className="mt-1 block w-1/2 rounded-md border border-slate-300 bg-white px-3 py-4 placeholder-slate-400 shadow-sm placeholder:font-semibold placeholder:text-gray-500 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+                      placeholder="Image URL"
+                    />
+                    <input
+                      type="genre"
+                      name="genre"
+                      onChange={(e) => setGenre(e.target.value)}
+                      className="mt-1 block w-1/2 rounded-md border border-slate-300 bg-white px-3 py-4 placeholder-slate-400 shadow-sm placeholder:font-semibold placeholder:text-gray-500 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+                      placeholder="Type Of Vacation"
+                    />
+                  </div>
+                </div>
+                <div className="">
+                  <textarea
+                    name="description"
+                    id="text"
+                    onChange={(e) => setDescription(e.target.value)}
+                    cols="30"
+                    rows="10"
+                    className="mb-10 h-40 w-full resize-none rounded-md border border-slate-300 p-5 font-semibold "
+                    placeholder="Describe your experience"
+                  ></textarea>
+                </div>
+                <div className="text-center">
+                  <input
+                    onClick={() => {
+                      validateForm();
+                    }}
+                    className="cursor-pointer rounded-lg bg-blue-700 px-8 py-5 text-sm font-semibold text-white"
+                    value="Recommend"
+                    type="submit"
+                  ></input>
+                </div>
               </div>
-              <div class="">
-                <textarea
-                  name="textarea"
-                  id="text"
-                  cols="30"
-                  rows="10"
-                  class="mb-10 h-40 w-full resize-none rounded-md border border-slate-300 p-5 font-semibold "
-                  placeholder="Describe your experience"
-                ></textarea>
-              </div>
-              <div class="text-center">
-                <a
-                  href="/themes"
-                  class="cursor-pointer rounded-lg bg-blue-700 px-8 py-5 text-sm font-semibold text-white"
-                >
-                  Recommend
-                </a>
-              </div>
-            </div>
+            </form>
           </div>{" "}
         </div>
       </div>
@@ -67,3 +151,6 @@ function CreateTheme() {
 }
 
 export default CreateTheme;
+CreateTheme.propTypes = {
+  setToken: PropTypes.func.isRequired,
+};
