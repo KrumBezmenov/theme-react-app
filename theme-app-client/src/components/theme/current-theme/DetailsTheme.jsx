@@ -2,11 +2,58 @@ import DetailsCard from "./DetailsCard/DetailsCard";
 
 import { useGetOneThemes } from "../../../hooks/useThemes";
 import { useParams } from "react-router-dom";
+import DetailsCardButtons from "./DetailsCard/DetailsCardButtons";
+import { useEffect, useState } from "react";
+
+async function editOneTheme(themeId, token) {
+  return fetch(`http://localhost:4000/themes/${themeId}/details`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: token,
+    },
+  }).then((data) => data.json());
+}
+
+async function guestTheme(themeId, token) {
+  return fetch(`http://localhost:4000/themes/${themeId}/details`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  }).then((data) => data.json());
+}
+
 function Details({ token }) {
   let { themesId } = useParams();
-  console.log("themeId", themesId);
-  const [theme] = useGetOneThemes(themesId);
-  console.log(theme);
+  // const [theme] = useGetOneThemes(themesId, token);
+
+  const [theme, setTheme] = useState({});
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        if (!loaded) {
+          let result = {};
+          if (token) {
+            result = await editOneTheme(themesId, token);
+          } else {
+            result = await guestTheme(themesId);
+          }
+
+          setTheme(result);
+
+          setLoaded(true);
+        }
+      } catch (e) {
+        setLoaded(false);
+        // Deal with the fact the chain failed
+      }
+    })();
+  });
 
   return (
     <>
@@ -19,6 +66,11 @@ function Details({ token }) {
                 key={theme._id}
                 theme={theme}
               ></DetailsCard>
+              <DetailsCardButtons
+                token={token}
+                key={theme._id}
+                theme={theme}
+              ></DetailsCardButtons>
             </div>
           </div>
         </div>
