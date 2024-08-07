@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function Home() {
   return (
     <>
@@ -22,12 +24,12 @@ function Home() {
                   Welcome and find your next journey{" "}
                 </div>
                 <div className="  text-center text-base-content p-4">
-                  <a
-                    href="/themes"
+                  <Link
+                    to="/themes"
                     className="rounded-md bg-yellow-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-yellow-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600"
                   >
                     Start Now
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
