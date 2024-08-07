@@ -14,7 +14,7 @@ async function loginUser(credentials) {
 }
 
 function LoginFinal({ setToken }) {
-  function validateForm({ email }) {
+  function validateForm({ email, password }) {
     let errors = [];
     if (email.length == 0) {
       errors.push("Invalid Form, Email Address can not be empty");
@@ -60,7 +60,6 @@ function LoginFinal({ setToken }) {
       email,
       password,
     });
-    console.log(token);
     setToken(token);
     navigate("/");
   };
@@ -127,7 +126,7 @@ function LoginFinal({ setToken }) {
                     </div>
                   ))
                 ) : (
-                  <h3>No Recommendations</h3>
+                  <span></span>
                 )}{" "}
                 <div className="btn-submit mt-20 px-4 py-2 rounded bg-yellow-500 hover:bg-yellow-400 text-white font-semibold text-center block w-full focus:outline-none focus:ring focus:ring-offset-2 focus:ring-rose-500 focus:ring-opacity-80 cursor-pointer">
                   <button className=" text-white py-2 px-4 rounded-full font-bold ">

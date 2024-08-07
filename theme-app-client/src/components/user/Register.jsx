@@ -13,44 +13,52 @@ async function registerUser(credentials) {
 }
 
 function RegisterCard({ setToken }) {
-  function validateForm() {
+  function validateForm({ email, password, rePassword }) {
+    let errors = [];
+
     if (email.length == 0) {
-      alert("Invalid Form, Email Address can not be empty");
-      return;
+      errors.push("Invalid Form, Email Address can not be empty");
     }
 
     if (email.length <= 10) {
-      alert("Invalid Form, Email Address can not be less than 10 characters");
-
-      return;
+      errors.push(
+        "Invalid Form, Email Address can not be less than 10 characters"
+      );
     }
 
     if (password.length < 4) {
-      alert(
+      errors.push(
         "Invalid Form, Password must contain greater than or equal to 4 characters."
       );
-      return;
     }
 
     if (password.length == 0) {
-      alert("Invalid Form, Password must can not be empty.");
-      return;
+      errors.push("Invalid Form, Password must can not be empty.");
     }
 
     if (password !== rePassword) {
-      alert("Password missmatch");
-      return;
+      errors.push("Password missmatch");
     }
 
-    alert("Welcome back");
+    return errors;
   }
   const navigate = useNavigate();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [rePassword, setRePassword] = useState();
+  const [errors, setErrors] = useState([]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const errorMap = validateForm({
+      email,
+      password,
+      rePassword,
+    });
+    setErrors(errorMap);
+    if (errorMap && errorMap.length > 0) {
+      return;
+    }
 
     if (password !== rePassword) {
       return;
@@ -136,13 +144,20 @@ function RegisterCard({ setToken }) {
                     Confirm Password
                   </label>
                 </div>
-
+                <div>
+                  {errors.length > 0 ? (
+                    errors.map((error, index) => (
+                      <div id="errors">
+                        <p>{error}</p>
+                      </div>
+                    ))
+                  ) : (
+                    <span></span>
+                  )}{" "}
+                </div>
                 <div className="btn-submit mt-20 px-4 py-2 rounded bg-yellow-500 hover:bg-yellow-400 text-white font-semibold text-center block w-full focus:outline-none focus:ring focus:ring-offset-2 focus:ring-rose-500 focus:ring-opacity-80 cursor-pointer">
                   <button className=" text-white py-2 px-4 rounded-full font-bold ">
                     <input
-                      onClick={() => {
-                        validateForm();
-                      }}
                       value="Register"
                       type="submit"
                       className="btn-submit"
