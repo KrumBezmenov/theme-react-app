@@ -25,7 +25,7 @@ const themesSchema = new mongoose.Schema({
   },
   description: {
     type: String,
-    minLength: [100, "Description should be at least 100 characters"],
+    minLength: [20, "Description should be at least 20 characters"],
     maxLength: [1500, "Description should be maximum 1500 characters"],
     required: true,
   },
