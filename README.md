@@ -50,7 +50,7 @@ npm install
 npm run start
 ```
 
-With this we initialize the server. After successful initialization of the server, it will run on port 4000 and it will apply creation of a database named "books-forum-db". It's going to store 2 collections, themes and users.
+With this we initialize the server. After successful initialization of the server, it will run on port 5173 and it will apply creation of a database named "themes-app-db". It's going to store 2 collections, themes and users.
 
 ### React intizialization guide
 
